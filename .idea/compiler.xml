@@ -4,6 +4,7 @@
     <bytecodeTargetLevel>
       <module name="first-spring.first-spring.main" target="11" />
       <module name="first-spring.first-spring.test" target="11" />
+      <module name="SpringCore" target="11" />
       <module name="SpringCore.main" target="11" />
       <module name="SpringCore.test" target="11" />
     </bytecodeTargetLevel>
