@@ -27,7 +27,7 @@ public class JpaMain {
             System.out.println("member name = " + member.getName());
 
 
-            // JPQL사용
+            // JPQL사용하여 조회
             List<Member> memberList = em.createQuery("select m from Member m", Member.class)
                     .getResultList();
 
@@ -47,16 +47,33 @@ public class JpaMain {
             // em.persist(member)안해도 됨..!
              */
 
-//            Member member = em.find(Member.class, 1L);
-            List<Member> memberList = em.createQuery("select m from Member m", Member.class)
-                    .getResultList();
 
-            for (Member member : memberList) {
-                System.out.println("member1 = " + member.getName());
-            }
+            // 비영속
+//            Member member1 = new Member();
+//            member1.setId(100L);
+//            member1.setName("member100");
 
-//            em.persist(member);
+
+            Member member = em.find(Member.class, 10L);
+
+            em.detach(member);
+
+            System.out.println("member.getId() = " + member.getId());
+            System.out.println("member.getName() = " + member.getName());
+
             ts.commit();
+
+
+            // 영속
+//            em.persist(member);
+
+            // 준영속
+//            em.detach(member);
+
+            // 삭제
+//            em.remove(member);
+
+
         }catch (Exception e){
             ts.rollback();
         }finally {
