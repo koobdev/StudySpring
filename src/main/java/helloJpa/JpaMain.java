@@ -1,5 +1,7 @@
 package helloJpa;
 
+import helloJpa.domain.Member;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -53,17 +55,6 @@ public class JpaMain {
 //            member1.setId(100L);
 //            member1.setName("member100");
 
-
-            Member member = em.find(Member.class, 10L);
-
-            em.detach(member);
-
-            System.out.println("member.getId() = " + member.getId());
-            System.out.println("member.getName() = " + member.getName());
-
-            ts.commit();
-
-
             // 영속
 //            em.persist(member);
 
@@ -74,6 +65,45 @@ public class JpaMain {
 //            em.remove(member);
 
 
+            JpaTeam team = new JpaTeam();
+            team.setName("teamA");
+            em.persist(team);
+
+            JpaMember member = new JpaMember();
+            member.setUsername("memberA");
+//            member.setTeamId(team.getId());
+            member.setJpateam(team); // 단방향 연관관계 시, set
+            em.persist(member);
+
+            // 연관관계 없는 조회
+            // 연관관계가 없어서 em.find를 2번해야지만 찾을 수 있다.
+//            JpaMember findMember = em.find(JpaMember.class, 1L);
+//            Long teamId = findMember.getTeamId();
+//            JpaTeam findTeam = em.find(JpaTeam.class, teamId);
+
+
+            // 단방향 연관관계
+//            JpaMember findMember = em.find(JpaMember.class, member.getId());
+//            JpaTeam findTeam = findMember.getJpateam();
+//            System.out.println("findTeam.getName() = " + findTeam.getName());
+
+
+
+            em.flush();
+            em.clear();
+
+
+
+            // 양방향 연관관계
+            JpaMember findMember = em.find(JpaMember.class, member.getId());
+            List<JpaMember> members = findMember.getJpateam().getMembers();
+
+            for (JpaMember m : members) {
+                System.out.println("member name = " + m.getUsername());
+            }
+
+
+            ts.commit();
         }catch (Exception e){
             ts.rollback();
         }finally {
