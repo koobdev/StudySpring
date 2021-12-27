@@ -18,6 +18,11 @@ public class JpaTeam {
     @OneToMany(mappedBy = "jpateam")
     private List<JpaMember> members = new ArrayList<>();
 
+    public void addMember(JpaMember member) {
+        member.setJpateam(this);
+        members.add(member);
+    }
+
     public Long getId() {
         return id;
     }

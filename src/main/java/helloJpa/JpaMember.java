@@ -45,5 +45,6 @@ public class JpaMember {
 
     public void setJpateam(JpaTeam jpateam) {
         this.jpateam = jpateam;
+//        jpateam.getMembers().add(this);
     }
 }

@@ -1,6 +1,7 @@
 package helloJpa;
 
 import helloJpa.domain.Member;
+import org.h2.util.TempFileDeleter;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -65,15 +66,15 @@ public class JpaMain {
 //            em.remove(member);
 
 
-            JpaTeam team = new JpaTeam();
-            team.setName("teamA");
-            em.persist(team);
+//            JpaTeam team = new JpaTeam();
+//            team.setName("teamA");
+//            em.persist(team);
 
-            JpaMember member = new JpaMember();
-            member.setUsername("memberA");
+//            JpaMember member = new JpaMember();
+//            member.setUsername("memberA");
 //            member.setTeamId(team.getId());
-            member.setJpateam(team); // 단방향 연관관계 시, set
-            em.persist(member);
+//            member.setJpateam(team); // 단방향 연관관계 시, set
+//            em.persist(member);
 
             // 연관관계 없는 조회
             // 연관관계가 없어서 em.find를 2번해야지만 찾을 수 있다.
@@ -89,17 +90,50 @@ public class JpaMain {
 
 
 
-            em.flush();
-            em.clear();
+//            em.flush();
+//            em.clear();
 
 
 
             // 양방향 연관관계
-            JpaMember findMember = em.find(JpaMember.class, member.getId());
-            List<JpaMember> members = findMember.getJpateam().getMembers();
+//            JpaMember findMember = em.find(JpaMember.class, member.getId());
+//            List<JpaMember> members = findMember.getJpateam().getMembers();
+//
+//            for (JpaMember m : members) {
+//                System.out.println("member name = " + m.getUsername());
+//            }
 
-            for (JpaMember m : members) {
-                System.out.println("member name = " + m.getUsername());
+
+            // 양방향 매핑 시 가장 많이 하는 실수
+            JpaTeam team = new JpaTeam();
+            team.setName("team1");
+            em.persist(team);
+
+            JpaMember member = new JpaMember();
+            member.setUsername("member1");
+//            member.setJpateam(team);
+            team.addMember(member);
+
+            JpaMember member2 = new JpaMember();
+            member2.setUsername("member2");
+//            member2.setJpateam(team);
+            team.addMember(member2);
+
+            em.persist(member);
+            em.persist(member2);
+
+
+//            team.getMembers().add(member);
+//            team.getMembers().add(member2);
+
+//            em.flush();
+//            em.clear();
+
+            JpaTeam findTeam = em.find(JpaTeam.class, team.getId());
+            List<JpaMember> findMembers = findTeam.getMembers();
+
+            for (JpaMember m : findMembers) {
+                System.out.println("m.getUsername() = " + m.getUsername());
             }
 
 

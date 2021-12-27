@@ -1,5 +1,8 @@
 package helloJpa;
 
+import helloJpa.domain.Order;
+import helloJpa.domain.OrderItem;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -15,6 +18,15 @@ public class Main {
         ts.begin();
 
         try {
+//            Order order = new Order();
+//            order.addOrderItem(new OrderItem());
+
+            Order order = new Order();
+            em.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+            em.persist(orderItem);
 
             ts.commit();
         }catch (Exception e){
