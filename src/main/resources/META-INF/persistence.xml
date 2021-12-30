@@ -5,12 +5,18 @@
     <persistence-unit name="hello">
 <!--        <class>helloJpa.JpaMember</class>-->
 <!--        <class>helloJpa.JpaTeam</class>-->
-        <class>helloJpa.domain.Category</class>
-        <class>helloJpa.domain.Delivery</class>
-        <class>helloJpa.domain.Item</class>
-        <class>helloJpa.domain.Member</class>
-        <class>helloJpa.domain.Order</class>
-        <class>helloJpa.domain.OrderItem</class>
+<!--        <class>helloJpa.domain.Category</class>-->
+<!--        <class>helloJpa.domain.Delivery</class>-->
+<!--        <class>helloJpa.domain.Item</class>-->
+<!--        <class>helloJpa.domain.Member</class>-->
+<!--        <class>helloJpa.domain.Order</class>-->
+<!--        <class>helloJpa.domain.OrderItem</class>-->
+
+        <class>helloJpa.domain.Album</class>
+        <class>helloJpa.domain.Book</class>
+        <class>helloJpa.domain.Movie</class>
+        <class>helloJpa.Culture</class>
+
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
@@ -22,7 +28,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
         </properties>
     </persistence-unit>
 </persistence>

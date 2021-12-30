@@ -1,7 +1,7 @@
 package helloJpa;
 
-import helloJpa.domain.Order;
-import helloJpa.domain.OrderItem;
+import helloJpa.domain.Album;
+import helloJpa.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +27,26 @@ public class Main {
 //            OrderItem orderItem = new OrderItem();
 //            orderItem.setOrder(order);
 //            em.persist(orderItem);
+
+            Album album = new Album();
+            album.setArtist("kim");
+            album.setName("album1");
+            album.setPrice(10000);
+            em.persist(album);
+
+            Book book = new Book();
+            book.setAuthor("Lee");
+            book.setIsbn("1234");
+            book.setName("book1");
+            book.setPrice(8000);
+            em.persist(book);
+
+            em.flush();
+            em.clear();
+
+            Book findBook = em.find(Book.class, book.getId());
+            System.out.println("findBook = " + findBook);
+
 
             ts.commit();
         }catch (Exception e){
