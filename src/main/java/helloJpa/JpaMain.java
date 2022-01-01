@@ -126,29 +126,47 @@ public class JpaMain {
 //            em.flush();
 //            em.clear();
 
-            JpaTeam team = new JpaTeam();
-            team.setName("team1");
-            em.persist(team);
 
-            JpaMember member = new JpaMember();
-            member.setUsername("member1");
-            member.setJpateam(team);
-            em.persist(member);
+
+            // 2022 01 01
+
+
+            JpaMember member1 = new JpaMember();
+            member1.setUsername("member1");
+            em.persist(member1);
+
+            JpaMember member2 = new JpaMember();
+            member2.setUsername("member2");
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            JpaTeam findTeam = em.find(JpaTeam.class, team.getId());
-            List<JpaMember> findMembers = findTeam.getMembers();
+            // 예제코드1
+//            JpaMember findMember1 = em.find(JpaMember.class, member1.getId());
+//            JpaMember findMember2 = em.getReference(JpaMember.class, member2.getId());
+//            System.out.println("findMember1==findMember2 : " + (findMember1==findMember2));
+//            System.out.println("findMember1 instanceof JpaMember : " + (findMember1 instanceof JpaMember));
+//            System.out.println("findMember2 instanceof JpaMember : " + (findMember2 instanceof JpaMember));
 
-            for (JpaMember m : findMembers) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-            }
+            // 예제코드2
+            // 순서 바뀌어도 !
+//            JpaMember findMember = em.find(JpaMember.class, member1.getId());
+//            JpaMember refMember = em.getReference(JpaMember.class, member1.getId());
+//
+//            System.out.println("findMember.getClass() = " + findMember.getClass());
+//            System.out.println("refMember.getClass() = " + refMember.getClass());
 
+
+            // 예제코드3
+            JpaMember refMember = em.getReference(JpaMember.class, member1.getId());
+            em.detach(refMember);
+            refMember.getUsername();
 
             ts.commit();
         }catch (Exception e){
             ts.rollback();
+            e.printStackTrace();
         }finally {
             em.close();
         }

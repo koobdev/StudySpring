@@ -57,7 +57,6 @@ public class SingletonWithPrototypeTest {
         public void addCount(){
             this.count++;
         }
-
         public int getCount(){
             return this.count;
         }
