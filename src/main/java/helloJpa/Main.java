@@ -1,8 +1,5 @@
 package helloJpa;
 
-import helloJpa.domain.Album;
-import helloJpa.domain.Book;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -28,24 +25,37 @@ public class Main {
 //            orderItem.setOrder(order);
 //            em.persist(orderItem);
 
-            Album album = new Album();
-            album.setArtist("kim");
-            album.setName("album1");
-            album.setPrice(10000);
-            em.persist(album);
+//            Album album = new Album();
+//            album.setArtist("kim");
+//            album.setName("album1");
+//            album.setPrice(10000);
+//            em.persist(album);
+//
+//            Book book = new Book();
+//            book.setAuthor("Lee");
+//            book.setIsbn("1234");
+//            book.setName("book1");
+//            book.setPrice(8000);
+//            em.persist(book);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Book findBook = em.find(Book.class, book.getId());
+//            System.out.println("findBook = " + findBook);
 
-            Book book = new Book();
-            book.setAuthor("Lee");
-            book.setIsbn("1234");
-            book.setName("book1");
-            book.setPrice(8000);
-            em.persist(book);
 
-            em.flush();
-            em.clear();
 
-            Book findBook = em.find(Book.class, book.getId());
-            System.out.println("findBook = " + findBook);
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+
+            em.persist(parent);
+
 
 
             ts.commit();

@@ -1,7 +1,5 @@
 package helloJpa;
 
-import helloJpa.domain.Member;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

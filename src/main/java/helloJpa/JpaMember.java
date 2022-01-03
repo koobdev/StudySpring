@@ -18,7 +18,7 @@ public class JpaMember {
 //    private Long teamId;
 
     // 단방향 연관관계
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private JpaTeam jpateam;
 

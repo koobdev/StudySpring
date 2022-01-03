@@ -1,8 +1,5 @@
 package helloJpa;
 
-import helloJpa.domain.Member;
-import org.h2.util.TempFileDeleter;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -131,16 +128,16 @@ public class JpaMain {
             // 2022 01 01
 
 
-            JpaMember member1 = new JpaMember();
-            member1.setUsername("member1");
-            em.persist(member1);
-
-            JpaMember member2 = new JpaMember();
-            member2.setUsername("member2");
-            em.persist(member2);
-
-            em.flush();
-            em.clear();
+//            JpaMember member1 = new JpaMember();
+//            member1.setUsername("member1");
+//            em.persist(member1);
+//
+//            JpaMember member2 = new JpaMember();
+//            member2.setUsername("member2");
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
 
             // 예제코드1
 //            JpaMember findMember1 = em.find(JpaMember.class, member1.getId());
@@ -159,9 +156,51 @@ public class JpaMain {
 
 
             // 예제코드3
-            JpaMember refMember = em.getReference(JpaMember.class, member1.getId());
-            em.detach(refMember);
-            refMember.getUsername();
+//            JpaMember refMember = em.getReference(JpaMember.class, member1.getId());
+//            em.detach(refMember);
+//            refMember.getUsername();
+
+
+            // 2022 01 03
+
+            JpaTeam team1 = new JpaTeam();
+            team1.setName("teamA");
+            em.persist(team1);
+
+            JpaTeam team2 = new JpaTeam();
+            team2.setName("teamB");
+            em.persist(team2);
+
+            JpaMember member1 = new JpaMember();
+            member1.setUsername("member1");
+            member1.setJpateam(team1);
+            em.persist(member1);
+
+            JpaMember member2 = new JpaMember();
+            member2.setUsername("member2");
+            member2.setJpateam(team2);
+            em.persist(member2);
+
+            em.flush();
+            em.clear();
+
+            // (예제 1)
+//            JpaMember findMember = em.find(JpaMember.class, member1.getId());
+//            // proxy 객체
+//            System.out.println("JpaTeam.class = " + findMember.getJpateam().getClass());
+//
+//            // 실제 사용시점 - proxy 초기화 후이기 때문에 실제 객체
+//            System.out.println("================");
+//            System.out.println("findTeamName = " + findMember.getJpateam().getName());
+//            System.out.println("================");
+
+
+            // (예제 2)
+            List<JpaMember> result = em.createQuery("select m from JpaMember m", JpaMember.class)
+                    .getResultList();
+
+
+
 
             ts.commit();
         }catch (Exception e){
