@@ -126,8 +126,6 @@ public class JpaMain {
 
 
             // 2022 01 01
-
-
 //            JpaMember member1 = new JpaMember();
 //            member1.setUsername("member1");
 //            em.persist(member1);
@@ -148,11 +146,11 @@ public class JpaMain {
 
             // 예제코드2
             // 순서 바뀌어도 !
-//            JpaMember findMember = em.find(JpaMember.class, member1.getId());
 //            JpaMember refMember = em.getReference(JpaMember.class, member1.getId());
+//            JpaMember findMember = em.find(JpaMember.class, member1.getId());
 //
-//            System.out.println("findMember.getClass() = " + findMember.getClass());
 //            System.out.println("refMember.getClass() = " + refMember.getClass());
+//            System.out.println("findMember.getClass() = " + findMember.getClass());
 
 
             // 예제코드3
@@ -185,19 +183,21 @@ public class JpaMain {
             em.clear();
 
             // (예제 1)
-//            JpaMember findMember = em.find(JpaMember.class, member1.getId());
-//            // proxy 객체
-//            System.out.println("JpaTeam.class = " + findMember.getJpateam().getClass());
-//
-//            // 실제 사용시점 - proxy 초기화 후이기 때문에 실제 객체
-//            System.out.println("================");
-//            System.out.println("findTeamName = " + findMember.getJpateam().getName());
-//            System.out.println("================");
+
+
+            JpaMember findMember = em.find(JpaMember.class, member1.getId());
+            // proxy 객체
+            System.out.println("JpaTeam.class = " + findMember.getJpateam().getClass());
+
+            // 실제 사용시점 - proxy 초기화 후이기 때문에 실제 객체
+            System.out.println("================");
+            System.out.println("findTeamName = " + findMember.getJpateam().getName());
+            System.out.println("================");
 
 
             // (예제 2)
-            List<JpaMember> result = em.createQuery("select m from JpaMember m", JpaMember.class)
-                    .getResultList();
+//            List<JpaMember> result = em.createQuery("select m from JpaMember m", JpaMember.class)
+//                    .getResultList();
 
 
 
