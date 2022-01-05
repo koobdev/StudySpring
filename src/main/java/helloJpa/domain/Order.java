@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order extends BaseEntity{
+public class Order{
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")
@@ -27,8 +27,8 @@ public class Order extends BaseEntity{
 
     private LocalDateTime orderDate;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+//    @Enumerated(EnumType.STRING)
+//    private OrderStatus status;
 
     public void addOrderItem(OrderItem orderItem) {
         orderItem.setOrder(this);
@@ -76,11 +76,11 @@ public class Order extends BaseEntity{
         this.orderDate = orderDate;
     }
 
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
+//    public OrderStatus getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(OrderStatus status) {
+//        this.status = status;
+//    }
 }

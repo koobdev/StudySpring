@@ -1,9 +1,12 @@
 package helloJpa;
 
+import helloJpa.domain.Member;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.swing.*;
 import java.util.List;
 
 public class JpaMain {
@@ -161,44 +164,98 @@ public class JpaMain {
 
             // 2022 01 03
 
-            JpaTeam team1 = new JpaTeam();
-            team1.setName("teamA");
-            em.persist(team1);
-
-            JpaTeam team2 = new JpaTeam();
-            team2.setName("teamB");
-            em.persist(team2);
-
-            JpaMember member1 = new JpaMember();
-            member1.setUsername("member1");
-            member1.setJpateam(team1);
-            em.persist(member1);
-
-            JpaMember member2 = new JpaMember();
-            member2.setUsername("member2");
-            member2.setJpateam(team2);
-            em.persist(member2);
-
-            em.flush();
-            em.clear();
+//            JpaTeam team1 = new JpaTeam();
+//            team1.setName("teamA");
+//            em.persist(team1);
+//
+//            JpaTeam team2 = new JpaTeam();
+//            team2.setName("teamB");
+//            em.persist(team2);
+//
+//            JpaMember member1 = new JpaMember();
+//            member1.setUsername("member1");
+//            member1.setJpateam(team1);
+//            em.persist(member1);
+//
+//            JpaMember member2 = new JpaMember();
+//            member2.setUsername("member2");
+//            member2.setJpateam(team2);
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
 
             // (예제 1)
-
-
-            JpaMember findMember = em.find(JpaMember.class, member1.getId());
-            // proxy 객체
-            System.out.println("JpaTeam.class = " + findMember.getJpateam().getClass());
-
-            // 실제 사용시점 - proxy 초기화 후이기 때문에 실제 객체
-            System.out.println("================");
-            System.out.println("findTeamName = " + findMember.getJpateam().getName());
-            System.out.println("================");
+//
+//            JpaMember findMember = em.find(JpaMember.class, member1.getId());
+//            // proxy 객체
+//            System.out.println("JpaTeam.class = " + findMember.getJpateam().getClass());
+//
+//            // 실제 사용시점 - proxy 초기화 후이기 때문에 실제 객체
+//            System.out.println("================");
+//            System.out.println("findTeamName = " + findMember.getJpateam().getName());
+//            System.out.println("================");
 
 
             // (예제 2)
 //            List<JpaMember> result = em.createQuery("select m from JpaMember m", JpaMember.class)
 //                    .getResultList();
 
+
+//            2022 01 05
+
+//            예제1
+//            Address address = new Address("seoul", "1street", "1234");
+//
+//            JpaMember member1 = new JpaMember();
+//            member1.setUsername("member1");
+//            member1.setHomeAddress(address);
+//
+//            JpaMember member2 = new JpaMember();
+//            member2.setUsername("member2");
+//            member2.setHomeAddress(address);
+//
+//            member1.setHomeAddress(new Address("deojeon", address.getStreet(), address.getZipcode()));
+
+
+//            예제1 저장
+//            JpaMember member = new JpaMember();
+//            member.setUsername("member1");
+//            member.setHomeAddress(new Address("seoul", "1street", "1234"));
+//            member.getFavoriteFoods().add("치킨");
+//            member.getFavoriteFoods().add("피자");
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+
+//            예제2 수정
+//            System.out.println("=============================");
+//            JpaMember findMember = em.find(JpaMember.class, member.getId());
+//            System.out.println("findMember.name = " + findMember.getUsername());
+
+
+            JpaMember member = new JpaMember();
+            member.setUsername("member1");
+            member.setHomeAddress(new Address("seoul", "1street", "1234"));
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("피자");
+            member.getAddressHistory().add(new Address("seoul", "1street", "1234"));
+            member.getAddressHistory().add(new Address("deajeon", "2street", "1234"));
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            JpaMember findMember = em.find(JpaMember.class, member.getId());
+
+            // Set 컬렉션일 경우
+            findMember.getFavoriteFoods().remove("피자");
+            findMember.getFavoriteFoods().add("햄버거");
+
+            // List<임베디드> 컬렉션일 경우
+            findMember.getAddressHistory().remove(new Address("deajeon", "2street", "1234"));
+            findMember.getAddressHistory().add(new Address("incheon", "2street", "1234"));
 
 
 

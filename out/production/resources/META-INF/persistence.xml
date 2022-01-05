@@ -7,16 +7,18 @@
         <class>helloJpa.JpaTeam</class>
         <class>helloJpa.Parent</class>
         <class>helloJpa.Child</class>
-<!--        <class>helloJpa.domain.Category</class>-->
-<!--        <class>helloJpa.domain.Delivery</class>-->
-<!--        <class>helloJpa.domain.Item</class>-->
-<!--        <class>helloJpa.domain.Member</class>-->
-<!--        <class>helloJpa.domain.Order</class>-->
-<!--        <class>helloJpa.domain.OrderItem</class>-->
+        <class>helloJpa.Address</class>
+        <class>helloJpa.Peroid</class>
+        <class>helloJpa.domain.Category</class>
+        <class>helloJpa.domain.Delivery</class>
+        <class>helloJpa.domain.Item</class>
+        <class>helloJpa.domain.Member</class>
+        <class>helloJpa.domain.Order</class>
+        <class>helloJpa.domain.OrderItem</class>
 
-<!--        <class>helloJpa.domain.Album</class>-->
-<!--        <class>helloJpa.domain.Book</class>-->
-<!--        <class>helloJpa.domain.Movie</class>-->
+        <class>helloJpa.domain.Album</class>
+        <class>helloJpa.domain.Book</class>
+        <class>helloJpa.domain.Movie</class>
 <!--        <class>helloJpa.Culture</class>-->
 
         <properties>
@@ -30,7 +32,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 </persistence>

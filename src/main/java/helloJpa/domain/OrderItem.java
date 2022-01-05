@@ -3,7 +3,7 @@ package helloJpa.domain;
 import javax.persistence.*;
 
 @Entity
-public class OrderItem extends BaseEntity{
+public class OrderItem{
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
@@ -13,9 +13,9 @@ public class OrderItem extends BaseEntity{
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
-    @ManyToOne
-    @JoinColumn(name = "ITEM_ID")
-    private Item item;
+//    @ManyToOne
+//    @JoinColumn(name = "ITEM_ID")
+//    private Item item;
 
 //    @Column(name = "ORDER_ID")
 //    private Long orderId;
@@ -42,13 +42,13 @@ public class OrderItem extends BaseEntity{
         this.order = order;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
+//    public Item getItem() {
+//        return item;
+//    }
+//
+//    public void setItem(Item item) {
+//        this.item = item;
+//    }
 
     public int getOrderPrice() {
         return orderPrice;

@@ -3,7 +3,7 @@ package helloJpa.domain;
 import javax.persistence.*;
 
 @Entity
-public class Delivery extends BaseEntity{
+public class Delivery{
 
     @Id @GeneratedValue
     private Long id;
@@ -13,8 +13,7 @@ public class Delivery extends BaseEntity{
 
     @Embedded
     private Address address;
-
-    private DeliveryStatus status;
+//    private DeliveryStatus status;
 
 
     public Long getId() {
@@ -41,11 +40,11 @@ public class Delivery extends BaseEntity{
         this.address = address;
     }
 
-    public DeliveryStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(DeliveryStatus status) {
-        this.status = status;
-    }
+//    public DeliveryStatus getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(DeliveryStatus status) {
+//        this.status = status;
+//    }
 }
